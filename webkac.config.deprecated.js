@@ -1,3 +1,4 @@
+// NOTE this used it be in configs/webpack.config.js
 import path from 'path';
 import webpack from 'webpack';
 
@@ -11,7 +12,7 @@ import CopyWebpackPlugin from 'copy-webpack-plugin';
 let rootDir = path.resolve(__dirname, '..');
 let cleanDirectories = ['build', 'dist'];
 // Plugins configuration
-let plugins = [new webpack.NoErrorsPlugin()];
+let plugins = [/* new webpack.NoErrorsPlugin() */];
 
 // Default value for development env
 let outputPath = path.join(rootDir, 'build');
@@ -47,8 +48,11 @@ let config = {
         exclude: /node_modules/,
         query: {
           cacheDirectory: true,
-          presets: ['es2015']
-        }
+        },
+        use: {
+          plugins: [],
+          presets: ['@babel/preset-env'],
+        },
       },
       //{ test: /\.(glsl|frag|vert)$/, loader: 'raw', exclude: /node_modules/ },
       //{ test: /\.(glsl|frag|vert)$/, loader: 'glslify', exclude: /node_modules/ },
@@ -120,13 +124,17 @@ module.exports = function configuration(options) {
     })
   );
 
+  /*
   plugins.push(
     new webpack.optimize.DedupePlugin()
   );
+  */
 
+  /*
   plugins.push(
     new webpack.optimize.OccurenceOrderPlugin(true)
   );
+  */
 
   if (!prod) {
     entryAppPath.push('webpack/hot/dev-server');
