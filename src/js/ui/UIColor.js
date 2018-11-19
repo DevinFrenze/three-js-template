@@ -1,4 +1,4 @@
-class UIColor {
+export default class UIColor {
   constructor(gui, name = 'rgbColor', color = new THREE.Color(), remote = true) {
     this._name = name;
     this[name] = color.toArray();
@@ -40,5 +40,3 @@ class UIColor {
     return this[this._name];
   }
 }
-
-export default UIColor;

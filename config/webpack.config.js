@@ -27,53 +27,53 @@ let config = {
   },
   module: {
     preLoaders: [
-    {
-      test: /\.js$/,
-      exclude: [/node_modules/,/local_modules/],
-      loader: 'eslint-loader'
-    }
+      {
+        test: /\.js$/,
+        exclude: [/node_modules/,/local_modules/],
+        loader: 'eslint-loader'
+      }
     ],
     // allow local glslify/browserify config to work
     postLoaders: [
-    {
-      test: /\.js$/,
-      loader: 'ify'
-    }
+      {
+        test: /\.js$/,
+        loader: 'ify'
+      }
     ],
     loaders: [
-    {
-      test: /\.js$/,
-      loader: 'babel',
-      exclude: /node_modules/,
-      query: {
-        cacheDirectory: true,
-        presets: ['es2015']
+      {
+        test: /\.js$/,
+        loader: 'babel',
+        exclude: /node_modules/,
+        query: {
+          cacheDirectory: true,
+          presets: ['es2015']
+        }
+      },
+      //{ test: /\.(glsl|frag|vert)$/, loader: 'raw', exclude: /node_modules/ },
+      //{ test: /\.(glsl|frag|vert)$/, loader: 'glslify', exclude: /node_modules/ },
+      {
+        test: /node_modules/,
+        loader: 'ify'
+      },
+      {
+        test: /\.css$/,
+        loader: "style-loader!css-loader"
+      },
+      {
+        test: /\.(jpg|jpeg|gif|png)$/,
+        exclude: /node_modules/,
+        loader:'url-loader?limit=100000'
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|svg)$/,
+        exclude: /node_modules/,
+        loader: 'url-loader?limit=100000'
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
       }
-    },
-    //{ test: /\.(glsl|frag|vert)$/, loader: 'raw', exclude: /node_modules/ },
-    //{ test: /\.(glsl|frag|vert)$/, loader: 'glslify', exclude: /node_modules/ },
-    {
-      test: /node_modules/,
-      loader: 'ify'
-    },
-    {
-      test: /\.css$/,
-      loader: "style-loader!css-loader"
-    },
-    {
-      test: /\.(jpg|jpeg|gif|png)$/,
-      exclude: /node_modules/,
-      loader:'url-loader?limit=100000'
-    },
-    {
-      test: /\.(woff|woff2|eot|ttf|svg)$/,
-      exclude: /node_modules/,
-      loader: 'url-loader?limit=100000'
-    },
-    {
-      test: /\.json$/,
-      loader: 'json-loader'
-    }
     ]
   }
 };
@@ -89,44 +89,44 @@ module.exports = function configuration(options) {
     suffix = 'prod';
     outputPath = path.join(rootDir, 'dist');
     plugins.push(
-        new webpack.optimize.UglifyJsPlugin({
-          warnings: false,
-          minimize: true,
-          sourceMap: false
-        })
-        );
+      new webpack.optimize.UglifyJsPlugin({
+        warnings: false,
+        minimize: true,
+        sourceMap: false
+      })
+    );
   }
 
   // Plugin configuration
   plugins.push(new Clean(cleanDirectories, rootDir));
   plugins.push(
-      new HtmlWebpackPlugin({
-        filename: 'index.html',
-        template: 'src/html/index.' + suffix + '.html'
-      })
-      );
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: 'src/html/index.' + suffix + '.html'
+    })
+  );
 
   plugins.push(
-      new CopyWebpackPlugin([
-        {from: 'src/textures',to:'textures'},
-        {from: 'src/models',to:'models'},
-      ])
-      );
+    new CopyWebpackPlugin([
+      {from: 'src/textures',to:'textures'},
+      {from: 'src/models',to:'models'},
+    ])
+  );
 
   plugins.push(
-      new webpack.ProvidePlugin({
-        THREE: 'three/build/three.js',
-        Stats: 'three/examples/js/libs/stats.min'
-      })
-      );
+    new webpack.ProvidePlugin({
+      THREE: 'three/build/three.js',
+      Stats: 'three/examples/js/libs/stats.min'
+    })
+  );
 
   plugins.push(
-      new webpack.optimize.DedupePlugin()
-      );
+    new webpack.optimize.DedupePlugin()
+  );
 
   plugins.push(
-      new webpack.optimize.OccurenceOrderPlugin(true)
-      );
+    new webpack.optimize.OccurenceOrderPlugin(true)
+  );
 
   if (!prod) {
     entryAppPath.push('webpack/hot/dev-server');

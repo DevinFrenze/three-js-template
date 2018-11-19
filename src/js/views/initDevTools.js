@@ -11,7 +11,7 @@ function initInspector(abstractApplication) {
   window.THREE = THREE;
 }
 
-export default {
-  initStats,
-  initInspector
+export default (abstractApplication) => {
+  initStats(abstractApplication);
+  initInspector(abstractApplication);
 };

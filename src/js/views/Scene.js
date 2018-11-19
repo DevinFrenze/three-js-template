@@ -1,3 +1,7 @@
+/*
+ * initializes a default camera and scene
+ * exposes an addToScene function
+ */
 export default class Scene {
   constructor() {
     this._scene = new THREE.Scene();
@@ -12,6 +16,9 @@ export default class Scene {
         10000                                   // far plane
     );
     this._camera.position.set( 0, 0, 400);
+    // by not adding the camera to the scene, we can rotate the entire scene
+    // without moving the camera
+    // this._scene.add(this._camera);
   }
 
   addToScene(obj) {

@@ -1,4 +1,4 @@
-import ObjectArray from 'scripts/controls/object_array';
+import ObjectArray from 'js/controls/object_array';
 
 export default class ExtrudeArray extends THREE.Object3D {
   constructor(

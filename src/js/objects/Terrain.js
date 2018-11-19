@@ -1,7 +1,7 @@
 import 'BufferGeometryUtils';
 import 'shaders/NormalMapShader';
 import 'ShaderTerrain';
-import GridTexture from 'scripts/objects/GridTexture';
+import GridTexture from 'js/objects/GridTexture';
 
 var SCREEN_WIDTH = window.innerWidth;
 var SCREEN_HEIGHT = window.innerHeight;

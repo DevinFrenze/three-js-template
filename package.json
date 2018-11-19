@@ -2,7 +2,7 @@
   "scripts": {
     "start": "webpack --config config/webpack.dev.js | webpack-dev-server --port 8080 --config config/webpack.dev.js --hot --history-api-fallback --progress --colors --inline --content-base ./build",
     "build": "webpack --config config/webpack.dev.js --progress --profile --colors",
-    "eslint": "eslint ./src --fix"
+    "lint": "eslint ./src/js --fix"
   },
   "license": "WTFPL",
   "devDependencies": {
@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@superguigui/wagner": "^0.1.13",
+    "dat.gui": "^0.7.3",
     "glsl-checker": "^1.0.1",
     "glsl-noise": "0.0.0",
     "glslify": "^5.0.0",

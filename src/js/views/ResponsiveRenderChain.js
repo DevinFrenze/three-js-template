@@ -1,5 +1,8 @@
-import RenderChain from 'scripts/views/RenderChain';
+import RenderChain from 'js/views/RenderChain';
 
+/*
+ * listens to window resize event and updates aspect ratio and size accordingly
+ */
 export default class ResponsiveRenderChain extends RenderChain {
   constructor() {
     super();
