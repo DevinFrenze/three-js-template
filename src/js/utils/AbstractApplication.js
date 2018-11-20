@@ -1,17 +1,17 @@
-import initDevTools from 'js/views/initDevTools';
-import ResponsiveRenderChain from 'js/views/ResponsiveRenderChain';
+import initDevTools from 'js/utils/initDevTools';
+import RenderChain from 'js/utils/RenderChain';
 
 /*
  * initializes dev tools if needed
  * implements boilerplate animation loop with update function
  * provides method for components to subscribe to being updated each frame
  *
- * inherits composer, renderer, addToRenderChain, camera, scene, and addToScene
+ * inherits composer, renderer, and addToRenderChain
  * from its parents
  */
-export default class AbstractApplication extends ResponsiveRenderChain {
-  constructor(dev = true){
-    super();
+export default class AbstractApplication extends RenderChain {
+  constructor(dev = true, scene, camera){
+    super(scene, camera);
     this.clock = new THREE.Clock();
     this.componentsToUpdate = [];
     this._animate = this.animate.bind(this);

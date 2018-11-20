@@ -9,3 +9,10 @@ glsl hot module replacement thanks to @mattdesl (https://github.com/mattdesl/web
 * Run `npm start`
 * Open http://localhost:8080
 * Open `src/app.js` file to see how it works
+
+## TODO
+
+* Add texture boiler plate
+* Add GLSL boiler plate
+* Add easing
+* Add video feedback boiler plate

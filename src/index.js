@@ -1,2 +1,2 @@
-import App from 'js/app';
+import App from 'js/App';
 new App(true);

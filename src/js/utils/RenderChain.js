@@ -1,18 +1,18 @@
-import Scene from 'js/views/Scene';
 import 'shaders/CopyShader';
 import 'postprocessing/EffectComposer';
 import 'postprocessing/RenderPass';
-import 'postprocessing/MaskPass';
-import 'postprocessing/ShaderPass';
 
 /*
  * initializes this.renderer this.composer
  * exposes addToRenderChain function 
+ * listens to window resize event and updates aspect ratio and size accordingly
  */
-export default class RenderChain extends Scene {
-  constructor() {
-    super();
+export default class RenderChain {
+  constructor(scene, camera) {
+    this.scene = scene;
+    this.camera = camera;
     this.initRenderer();
+    window.addEventListener( 'resize', this.onWindowResize.bind(this), false );
   }
 
   initRenderer() {
@@ -34,5 +34,13 @@ export default class RenderChain extends Scene {
     this.composer.passes.forEach(function(pass) { pass.renderToScreen = false; });
     pass.renderToScreen = true;
     this.composer.addPass( pass );
+  }
+
+  onWindowResize() {
+    this.camera.aspect = window.innerWidth / window.innerHeight;
+    this.camera.updateProjectionMatrix();
+
+    this.renderer.setSize( window.innerWidth, window.innerHeight );
+    this.composer.setSize( window.innerWidth, window.innerHeight );
   }
 }

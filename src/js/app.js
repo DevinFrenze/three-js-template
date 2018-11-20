@@ -1,30 +1,26 @@
-import AbstractApplication from 'js/views/AbstractApplication';
+import AbstractApplication from 'js/utils/AbstractApplication';
 import 'utils/GeometryUtils';
+import 'postprocessing/ShaderPass';
 import MouseFromCenterRotation from 'js/controls/MouseFromCenterRotation';
 
 import 'shaders/RGBShiftShader';
-import * as sceneObjects from './sceneObjects';
+import scene, { icoMaterial } from './scene';
+import camera from './camera';
 import * as ui from './ui';
 
 const RGB_SHIFT_MAX = 0.004;
 
 export default class App extends AbstractApplication {
   constructor(dev = false){
-    super(dev);
+    super(dev, scene, camera);
 
     this.initNavigation();
-    this.initScene();
     this.initPostProcessing();
     this.animate();
   }
   
   initNavigation() {
     const controls = new MouseFromCenterRotation(this);
-  }
-
-  initScene() {
-    this.addToScene(sceneObjects.icoMesh);
-    this.addToScene(sceneObjects.icoMeshWire);
   }
 
   initPostProcessing() {
@@ -37,7 +33,7 @@ export default class App extends AbstractApplication {
     super.update();
 
     const now = Date.now();
-    sceneObjects.icoMaterial.color = ui.icoColor._color;
+    icoMaterial.color = ui.icoColor._color;
     this.rgbShift.uniforms['amount'].value = Math.sin(now / 19000) * RGB_SHIFT_MAX;
   }
 }

@@ -1,7 +1,4 @@
-const {
-  Quaternion,
-  Vector3
-} = THREE;
+const { Quaternion, Vector3 } = THREE;
 
 class Controls {
   constructor(abstractApplication, speed = 1) {
