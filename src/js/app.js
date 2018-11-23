@@ -4,6 +4,8 @@ import 'postprocessing/ShaderPass';
 import MouseFromCenterRotation from 'js/controls/MouseFromCenterRotation';
 
 import 'shaders/RGBShiftShader';
+import 'shaders/DotScreenShader';
+import 'shaders/BasicShader';
 import scene, { icoMaterial } from './scene';
 import camera from './camera';
 import * as ui from './ui';
@@ -11,8 +13,8 @@ import * as ui from './ui';
 const RGB_SHIFT_MAX = 0.004;
 
 export default class App extends AbstractApplication {
-  constructor(dev = false){
-    super(dev, scene, camera);
+  constructor(dev){
+    super(scene, camera, dev, false);
 
     this.initNavigation();
     this.initPostProcessing();
@@ -25,7 +27,6 @@ export default class App extends AbstractApplication {
 
   initPostProcessing() {
     this.rgbShift = new THREE.ShaderPass( THREE.RGBShiftShader );
-    this.rgbShift.uniforms[ 'amount' ].value = 0.0015;
     this.addToRenderChain( this.rgbShift );
   }
 
@@ -35,5 +36,6 @@ export default class App extends AbstractApplication {
     const now = Date.now();
     icoMaterial.color = ui.icoColor._color;
     this.rgbShift.uniforms['amount'].value = Math.sin(now / 19000) * RGB_SHIFT_MAX;
+    this.rgbShift.uniforms['angle'].value = Math.sin(now / 10000);
   }
 }

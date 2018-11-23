@@ -32,7 +32,7 @@ class Controls {
     rotationAxis = rotationAxis.normalize();
 
     let quaternionDelta = new Quaternion();
-    quaternionDelta.setFromAxisAngle(rotationAxis, length * this.speed);
+    quaternionDelta.setFromAxisAngle(rotationAxis, length * this.speed * 10);
 
     const quaternionProduct = new Quaternion();
     quaternionProduct.multiplyQuaternions( quaternionDelta, this.scene.quaternion );

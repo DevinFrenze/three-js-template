@@ -10,8 +10,8 @@ import RenderChain from 'js/utils/RenderChain';
  * from its parents
  */
 export default class AbstractApplication extends RenderChain {
-  constructor(dev = true, scene, camera){
-    super(scene, camera);
+  constructor(scene, camera, dev = true, videoFeedback){
+    super(scene, camera, videoFeedback);
     this.clock = new THREE.Clock();
     this.componentsToUpdate = [];
     this._animate = this.animate.bind(this);
